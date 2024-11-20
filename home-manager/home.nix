@@ -72,6 +72,7 @@
         "sha256-BvVE9qupMjw7JRqFUj1J0a4ys6kc9fOLBPx2bGaapTk="
         "Fuchsia-Pop";
   home.packages = [
+    pkgs.protonplus
     pkgs.firefox
     pkgs.spotify
     pkgs.vscode-fhs
@@ -93,9 +94,18 @@
     pkgs.gh
     pkgs.maven
     pkgs.sqlite
-    pkgs.flatpak
     pkgs.element-desktop
-    pkgs.retroarch
+    pkgs.retroarch    
+    pkgs.ninja
+    pkgs.meson
+    pkgs.gtk4
+    pkgs.libadwaita
+    pkgs.json-glib
+    pkgs.libsoup
+    pkgs.libarchive
+    pkgs.desktop-file-utils
+    pkgs.libgee
+
   ];
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -105,7 +115,6 @@
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  services.flatpak.enable = true;
   programs.git = {
     enable = true;
     userName = "wogyfikacja";

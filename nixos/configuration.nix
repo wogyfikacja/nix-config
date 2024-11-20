@@ -10,7 +10,7 @@
       ./hardware-configuration.nix
     ];
     # Enable OpenGL
-    hardware.opengl = {
+   hardware.opengl = {
       enable = true;
     };
 
@@ -24,7 +24,6 @@
   };
     # Modesetting is required.
     modesetting.enable = true;
-
     # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
     # Enable this if you have graphical corruption issues or application crashes after waking
     # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
@@ -59,7 +58,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
+  services.flatpak.enable = true;
   networking.hostName = "wogyfikacja"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -76,6 +75,22 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
+  # setting default shell
+  programs.zsh = {
+   enable = true;
+   shellAliases = {
+    ll = "ls -l";
+    update = "sudo nixos-rebuild switch";
+    };
+    oh-my-zsh = {
+    enable = true;
+    plugins = [ "git" ];
+    theme = "robbyrussell";
+  };
+};
+    users.extraUsers.wogyfikacja = {
+      shell = pkgs.zsh;
+    };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -137,6 +152,8 @@
 	firefox
 	steam-run
 	gnomeExtensions.appindicator
+	eza
+	zed-editor
   ];
   services.udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
   programs.java.enable = true;
