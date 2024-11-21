@@ -71,6 +71,13 @@
         "https://github.com/ful1e5/fuchsia-cursor/releases/download/v2.0.0/Fuchsia-Pop.tar.gz"
         "sha256-BvVE9qupMjw7JRqFUj1J0a4ys6kc9fOLBPx2bGaapTk="
         "Fuchsia-Pop";
+  gtk.iconTheme = {
+
+	        package = pkgs.tela-icon-theme;
+
+	        name = "Tela-blue-dark";
+
+	      };
   home.packages = [
     pkgs.protonplus
     pkgs.firefox
@@ -105,7 +112,8 @@
     pkgs.libarchive
     pkgs.desktop-file-utils
     pkgs.libgee
-
+    pkgs.warp-terminal
+    pkgs.adwaita-icon-theme
   ];
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -119,10 +127,28 @@
     enable = true;
     userName = "wogyfikacja";
     userEmail = "emil1bakula@gmail.com";
-  }; 
+  };
+  programs.zsh = {
+  enable = true;
+  enableCompletion = true;
+  syntaxHighlighting.enable = true;
+  enableAutosuggestions = true;
+  shellAliases = {
+    ll = "ls -l";
+    update = "sudo nixos-rebuild switch";
+  };
+  history = {
+    size = 10000;
+    path = "${config.xdg.dataHome}/zsh/history";
+  };
+  oh-my-zsh = {
+    enable = true;
+    plugins = [ "git" ];
+    theme = "robbyrussell";
+  };
+  };
   # Enable home-manager and git
   programs.home-manager.enable = true;
-
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 

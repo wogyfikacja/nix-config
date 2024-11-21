@@ -55,6 +55,8 @@
   # √(3840² + 2160²) px / 15.60 in ≃ 282 dpi
   services.xserver.dpi = 282;
 
+  services.xserver.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -74,24 +76,7 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
-  # setting default shell
-  programs.zsh = {
-   enable = true;
-   shellAliases = {
-    ll = "ls -l";
-    update = "sudo nixos-rebuild switch";
-    };
-    oh-my-zsh = {
-    enable = true;
-    plugins = [ "git" ];
-    theme = "robbyrussell";
-  };
-};
-    users.extraUsers.wogyfikacja = {
-      shell = pkgs.zsh;
-    };
-
+  nix.settings.experimental-features = [ "flakes" "nix-command" ];
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -107,7 +92,7 @@
 
   # Configure console keymap
   console.keyMap = "pl2";
-
+  
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -148,12 +133,12 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   	wget
-	git
-	firefox
-	steam-run
-	gnomeExtensions.appindicator
-	eza
-	zed-editor
+    git
+    firefox
+    steam-run
+    gnomeExtensions.appindicator
+    eza
+    zed-editor
   ];
   services.udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
   programs.java.enable = true;
@@ -180,7 +165,9 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
-
+  users.users.wogyfikacja.shell = pkgs.zsh;
+  environment.shells = with pkgs; [ zsh ];
+  users.users.wogyfikacja.ignoreShellProgramCheck = true;
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
