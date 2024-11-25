@@ -154,9 +154,13 @@
     gnome.adwaita-icon-theme
     gnome-icon-theme
     hicolor-icon-theme
-    wezterm
-    stylix
   ];
+  config = {
+    modules = {
+      terminals = {
+        wezterm.enable = true;
+      };
+    };
   services.udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
   programs.java.enable = true;
   programs.steam = {
