@@ -18,6 +18,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
+    ./terminals/wezterm/wezterm.nix
   ];
   nixpkgs = {
     # You can add overlays here
