@@ -49,35 +49,6 @@
 };
   home.username = "wogyfikacja";
   home.homeDirectory = "/home/wogyfikacja";
-
-   home.pointerCursor = 
-    let 
-      getFrom = url: hash: name: {
-          gtk.enable = true;
-          x11.enable = true;
-          name = name;
-          size = 48;
-          package = 
-            pkgs.runCommand "moveUp" {} ''
-              mkdir -p $out/share/icons
-              ln -s ${pkgs.fetchzip {
-                url = url;
-                hash = hash;
-              }} $out/share/icons/${name}
-          '';
-        };
-    in
-      getFrom 
-        "https://github.com/ful1e5/fuchsia-cursor/releases/download/v2.0.0/Fuchsia-Pop.tar.gz"
-        "sha256-BvVE9qupMjw7JRqFUj1J0a4ys6kc9fOLBPx2bGaapTk="
-        "Fuchsia-Pop";
-  gtk.iconTheme = {
-
-	        package = pkgs.tela-icon-theme;
-
-	        name = "Tela-blue-dark";
-
-	      };
   home.packages = [
     pkgs.protonplus
     pkgs.firefox
@@ -112,8 +83,6 @@
     pkgs.libarchive
     pkgs.desktop-file-utils
     pkgs.libgee
-    pkgs.warp-terminal
-    pkgs.adwaita-icon-theme
   ];
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

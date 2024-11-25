@@ -8,7 +8,8 @@
     # at the same time. Here's an working example:
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
-
+        nixgl.url = "github:nix-community/nixGL";
+    stylix.url = "github:danth/stylix";
     # Home manager
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -18,6 +19,7 @@
     self,
     nixpkgs,
     home-manager,
+    stylix,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -48,7 +50,6 @@
     # Reusable home-manager modules you might want to export
     # These are usually stuff you would upstream into home-manager
     homeManagerModules = import ./modules/home-manager;
-
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
@@ -58,10 +59,10 @@
         modules = [
           # > Our main nixos configuration file <
           ./nixos/configuration.nix
+          stylix.nixosModules.stylix
         ];
       };
     };
-
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
@@ -72,6 +73,7 @@
         modules = [
           # > Our main home-manager configuration file <
           ./home-manager/home.nix
+          stylix.nixosModules.stylix
         ];
       };
     };

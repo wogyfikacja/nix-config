@@ -13,10 +13,11 @@
    hardware.opengl = {
       enable = true;
     };
-
     # Load nvidia driver for Xorg and Wayland
-    services.xserver.videoDrivers = ["nvidia"];
-
+    services.xserver = {
+      videoDrivers = ["nvidia"];
+    };
+    hardware.graphics.enable = true;
   hardware.nvidia = {
     prime = {
       amdgpuBusId = "PCI:5:0:0";
@@ -139,6 +140,22 @@
     gnomeExtensions.appindicator
     eza
     zed-editor
+    uv
+    glib
+    zlib
+    libGL
+    fontconfig
+    xorg.libX11
+    libxkbcommon
+    freetype
+    dbus
+    gnomeExtensions.forge
+    gnomeExtensions.appindicator
+    gnome.adwaita-icon-theme
+    gnome-icon-theme
+    hicolor-icon-theme
+    wezterm
+    stylix
   ];
   services.udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
   programs.java.enable = true;
@@ -147,7 +164,12 @@
 	remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
   	dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
-  # Some programs need SUID wrappers, can be configured further or are
+  stylix = {
+    enable = true;
+    image = ./wallpaper.jpg;
+    polarity = "dark";
+  };
+    # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {
