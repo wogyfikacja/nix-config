@@ -80,6 +80,8 @@
     pkgs.element-desktop
     pkgs.retroarch   
     pkgs.kitty
+    pkgs.thefuck
+    pkgs.tldr
   ];
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -94,6 +96,9 @@
     userName = "wogyfikacja";
     userEmail = "emil1bakula@gmail.com";
   };
+  programs.thefuck = {     
+		enable = true;          
+	};  
   programs.zsh = {
   enable = true;
   enableCompletion = true;
@@ -103,6 +108,7 @@
     ll = "ls -l";
     update = "sudo nixos-rebuild switch";
   };
+   
   history = {
     size = 10000;
     path = "${config.xdg.dataHome}/zsh/history";
@@ -114,8 +120,9 @@
   };
   };
   stylix = {
-    image = ./nixos/wallpaper.jpg;
+    image = ./wallpaper.jpg;
     enable = true;
+    polarity = "dark";
     targets.kitty.enable = true;
   };
   # Enable home-manager and git
