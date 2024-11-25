@@ -18,7 +18,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-    ./terminals/wezterm/wezterm.nix
+    ./terminals/wezterm
   ];
   nixpkgs = {
     # You can add overlays here
@@ -43,6 +43,11 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
+      modules = {
+        terminals = {
+          wezterm.enable = true;
+        };
+      };
       permittedInsecurePackages = [
                 "electron-25.9.0"
               ];
@@ -62,7 +67,6 @@
     pkgs.python3
     pkgs.cargo
     pkgs.pciutils
-    pkgs.bibata-cursors
     pkgs.mdslides
     pkgs.obsidian
     pkgs.lutris
@@ -74,16 +78,8 @@
     pkgs.maven
     pkgs.sqlite
     pkgs.element-desktop
-    pkgs.retroarch    
-    pkgs.ninja
-    pkgs.meson
-    pkgs.gtk4
-    pkgs.libadwaita
-    pkgs.json-glib
-    pkgs.libsoup
-    pkgs.libarchive
-    pkgs.desktop-file-utils
-    pkgs.libgee
+    pkgs.retroarch   
+    pkgs.kitty
   ];
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -102,7 +98,7 @@
   enable = true;
   enableCompletion = true;
   syntaxHighlighting.enable = true;
-  enableAutosuggestions = true;
+  autosuggestion.enable = true;
   shellAliases = {
     ll = "ls -l";
     update = "sudo nixos-rebuild switch";
@@ -116,6 +112,11 @@
     plugins = [ "git" ];
     theme = "robbyrussell";
   };
+  };
+  stylix = {
+    image = ./nixos/wallpaper.jpg;
+    enable = true;
+    targets.kitty.enable = true;
   };
   # Enable home-manager and git
   programs.home-manager.enable = true;
